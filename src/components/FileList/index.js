@@ -6,14 +6,15 @@ import { Container, FileInfo, Preview } from './styles';
 
 const FileList = ({ files, onDelete }) => (
   <Container>
-    {files.map(uploadedFile => (
+    {files.map((uploadedFile) => (
       <li key={uploadedFile.id}>
         <FileInfo>
           <Preview src={uploadedFile.preview} />
           <div>
             <strong>{uploadedFile.name}</strong>
             <span>
-              {uploadedFile.readableSize}{' '}
+              {uploadedFile.readableSize}
+              {' '}
               {!!uploadedFile.url && (
                 <button onClick={() => onDelete(uploadedFile.id)}>Excluir</button>
               )}
@@ -24,29 +25,29 @@ const FileList = ({ files, onDelete }) => (
         <div>
           {!uploadedFile.uploaded && !uploadedFile.error && (
             <CircularProgressbar
-            styles={{
-              root: { width: 24 },
-              path: { stroke: '#7159c1' }
-            }}
-            strokeWidth={10}
-            value={uploadedFile.progress}
-          />
+              styles={{
+                root: { width: 24 },
+                path: { stroke: '#7159c1' },
+              }}
+              strokeWidth={10}
+              value={uploadedFile.progress}
+            />
           )}
 
           {uploadedFile.url && (
-            <a 
+            <a
               href={uploadedFile.url}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <MdLink style={{ marginRight: 8  }} size={24} color='#222' />
+              <MdLink style={{ marginRight: 8 }} size={24} color="#222" />
             </a>
           )}
 
-          { uploadedFile.uploaded && <MdCheckCircle size={24} color='#78e5d5' /> }
-          { uploadedFile.error && <MdError size={24} color='#e57878' /> }
+          { uploadedFile.uploaded && <MdCheckCircle size={24} color="#78e5d5" /> }
+          { uploadedFile.error && <MdError size={24} color="#e57878" /> }
         </div>
-    </li>
+      </li>
     ))}
   </Container>
 );
